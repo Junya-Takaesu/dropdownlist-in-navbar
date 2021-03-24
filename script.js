@@ -1,14 +1,23 @@
-const toggleDropdown = () => {
-  document.querySelector("#myDropdown").classList.toggle("show");
+const toggleDropdown = (list) => {
+  const currentElementWithShow = document.querySelector(".show");
+  if (currentElementWithShow) {
+    currentElementWithShow.classList.toggle("show");
+  }
+  if (list) {
+    list.classList.toggle("show");
+  }
 }
 
-document.querySelector("#dropbtn").addEventListener("click", toggleDropdown);
+const dropBtns = document.querySelectorAll(".dropbtn");
+
+dropBtns.forEach(dropBtn => {
+  dropBtn.addEventListener("click", () => {
+    toggleDropdown(dropBtn.nextElementSibling);
+  });
+});
 
 window.addEventListener("click", (e) =>{
-  if(!e.target.matches('#dropbtn')) {
-    let myDropdown = document.querySelector("#myDropdown");
-    if (myDropdown.classList.contains("show")) {
-      myDropdown.classList.remove("show");
-    }
+  if(!e.target.matches('.dropbtn')) {
+    toggleDropdown();
   }
 });
